@@ -1,16 +1,3 @@
-# algoriza_1st_task
+# Algoriza 1st Task
 
-Algoriza first task.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![ic_launcher](https://user-images.githubusercontent.com/101954795/177343406-22f1174d-1b8c-4f41-8f3e-8a4ce3bb7066.png)
