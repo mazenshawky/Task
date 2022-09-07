@@ -1,3 +1,3 @@
 # Mono
 
-## A flutter project with clean code.
+## A flutter project with clean architecture.
