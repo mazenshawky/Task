@@ -41,49 +41,25 @@ class Data {
 }
 
 class User {
-  String? firstName;
-  String? lastName;
-  Null? balance;
-  String? birthDate;
+  String? name;
   String? email;
-  String? phoneNumber;
-  String? gender;
-  String? profession;
+  String? city;
   String? joinedDate;
 
-  User(
-      {this.firstName,
-        this.lastName,
-        this.balance,
-        this.birthDate,
-        this.email,
-        this.phoneNumber,
-        this.gender,
-        this.profession,
-        this.joinedDate});
+  User({this.name, this.email, this.city, this.joinedDate});
 
   User.fromJson(Map<String, dynamic> json) {
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    balance = json['balance'];
-    birthDate = json['birth_date'];
+    name = json['name'];
     email = json['email'];
-    phoneNumber = json['phone_number'];
-    gender = json['gender'];
-    profession = json['profession'];
+    city = json['city'];
     joinedDate = json['joined_date'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['balance'] = this.balance;
-    data['birth_date'] = this.birthDate;
+    data['name'] = this.name;
     data['email'] = this.email;
-    data['phone_number'] = this.phoneNumber;
-    data['gender'] = this.gender;
-    data['profession'] = this.profession;
+    data['city'] = this.city;
     data['joined_date'] = this.joinedDate;
     return data;
   }
@@ -112,23 +88,17 @@ class RegisterErrorModel {
 }
 
 class Errors {
-  List<String>? birthDate;
   List<String>? email;
-  List<String>? phoneNumber;
 
-  Errors({this.birthDate, this.email, this.phoneNumber});
+  Errors({this.email});
 
   Errors.fromJson(Map<String, dynamic> json) {
-    birthDate = json['birth_date'] == null ?[] : List<String>.from(json['birth_date'].map((x) => x));
-    email = json['email'] == null ?[] : List<String>.from(json['email'].map((x) => x));
-    phoneNumber = json['phone_number'] == null ?[] : List<String>.from(json['phone_number'].map((x) => x));
+    email = json['email'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['birth_date'] = this.birthDate;
     data['email'] = this.email;
-    data['phone_number'] = this.phoneNumber;
     return data;
   }
 }

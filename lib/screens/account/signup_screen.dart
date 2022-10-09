@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/core/Util/netWork/local/cache_helper.dart';
+import 'package:mono/models/city_model.dart';
 import 'package:mono/provider/auth_provider.dart';
+import 'package:mono/provider/city_provider.dart';
 import 'package:mono/provider/signup_provider.dart';
+import 'package:mono/screens/account/city_screen.dart';
 import 'package:mono/screens/homepage/homepage.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
@@ -18,18 +21,22 @@ import 'package:provider/provider.dart';
 
 import 'otp_screen.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final professionController = TextEditingController();
-  String birthDate = '';
-  final phoneController = TextEditingController();
-  final passwordController = TextEditingController();
-  String gender = 'male';
 
-  DateTime currentDate = DateTime.now();
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final nameController = TextEditingController();
+
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  City? city;
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -98,7 +105,7 @@ class SignUpScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            title: "first name",
+                            title: "name",
                             fontSize: 15,
                             color: blackColor,
                           ),
@@ -107,57 +114,13 @@ class SignUpScreen extends StatelessWidget {
                             height: Helper.setHeight(context) * 0.10 - 70,
                           ),
                           CustomTextField(
-                            controller: firstNameController,
+                            controller: nameController,
                             keyboardType: TextInputType.name,
                             textInputAction: TextInputAction.next,
                             autofillHints: [AutofillHints.name],
                             onChanged: (_) {},
                             validation: firstNameField,
                             hintText: "first name",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                            suffixIcon: CustomInkWell(
-                              onTap: () {},
-                              child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    "assets/icons/ic_profile.png",
-                                    scale: 2,
-                                  )),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
-                    ),
-                    //last name
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "last name",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          CustomTextField(
-                            controller: lastNameController,
-                            keyboardType: TextInputType.name,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: [AutofillHints.name],
-                            onChanged: (_) {},
-                            validation: lastNameField,
-                            hintText: "last name",
                             isUnderlineInputBorder: true,
                             isOutlineInputBorder: false,
                             contentPaddingLeft: 5,
@@ -211,95 +174,6 @@ class SignUpScreen extends StatelessWidget {
                                   padding: EdgeInsets.all(8.0),
                                   child: Image.asset(
                                     "assets/icons/ic_mail.png",
-                                    scale: 2,
-                                  )),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
-                    ),
-                    //profession
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "phone number",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          CustomTextField(
-                            controller: phoneController,
-                            keyboardType: TextInputType.phone,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: [
-                              AutofillHints.telephoneNumberNational
-                            ],
-                            onChanged: (_) {},
-                            validation: phoneField,
-                            hintText: "phone number",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                            suffixIcon: CustomInkWell(
-                              onTap: () {},
-                              child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    "assets/icons/ic_phone.png",
-                                    scale: 2,
-                                  )),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
-                    ),
-                    //email
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "profession",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          CustomTextField(
-                            controller: professionController,
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (_) {},
-                            validation: professionField,
-                            hintText: "profession",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                            suffixIcon: CustomInkWell(
-                              onTap: () {},
-                              child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    "assets/icons/ic_briefcase.png",
                                     scale: 2,
                                   )),
                             ),
@@ -372,86 +246,59 @@ class SignUpScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            title: "birth date",
+                            title: "city",
                             fontSize: 15,
                             color: blackColor,
                           ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          CustomButton(
-                            onPressed: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: birthDate.isEmpty
-                                    ? currentDate
-                                    : DateTime.parse(birthDate),
-                                firstDate: DateTime(1940),
-                                lastDate: DateTime.now(),
-                              );
-                              if (pickedDate == null) return;
-                              birthDate =
-                                  pickedDate.toString().split(" ")[0];
-                              authProvider.datePicked();
-                            },
-                            title: birthDate.isEmpty
-                                ? 'Select a date'
-                                : '${birthDate}',
-                            textColor: blueColor,
-                          ),
+                          Card(child: buildCity(),),
                         ],
                       ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 80,
                     ),
                     //gender
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "gender",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          Row(
-                            children: [
-                              Radio(
-                                value: 1,
-                                groupValue: authProvider.value,
-                                onChanged: (value){
-                                  authProvider.chooseGender(value);
-                                  gender = 'male';
-                                },
-                                activeColor: blueColor,
-                              ),
-                              // const SizedBox(width: 5.0),
-                              const Text('male'),
-                              const SizedBox(width: 30.0),
-                              Radio(
-                                value: 2,
-                                groupValue: authProvider.value,
-                                onChanged: (value){
-                                  authProvider.chooseGender(value);
-                                  gender = 'female';
-                                },
-                                activeColor: blueColor,
-                              ),
-                              const Text('female'),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   padding: kHrPadding,
+                    //   alignment: Alignment.centerLeft,
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       CustomText(
+                    //         title: "gender",
+                    //         fontSize: 15,
+                    //         color: blackColor,
+                    //       ),
+                    //       //Space
+                    //       SizedBox(
+                    //         height: Helper.setHeight(context) * 0.10 - 70,
+                    //       ),
+                    //       Row(
+                    //         children: [
+                    //           Radio(
+                    //             value: 1,
+                    //             groupValue: authProvider.value,
+                    //             onChanged: (value){
+                    //               authProvider.chooseGender(value);
+                    //               gender = 'male';
+                    //             },
+                    //             activeColor: blueColor,
+                    //           ),
+                    //           // const SizedBox(width: 5.0),
+                    //           const Text('male'),
+                    //           const SizedBox(width: 30.0),
+                    //           Radio(
+                    //             value: 2,
+                    //             groupValue: authProvider.value,
+                    //             onChanged: (value){
+                    //               authProvider.chooseGender(value);
+                    //               gender = 'female';
+                    //             },
+                    //             activeColor: blueColor,
+                    //           ),
+                    //           const Text('female'),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(height: Helper.setHeight(context) * 0.03 + 10),
                     //Sign up
                     Consumer<SignUpProvider>(
@@ -460,16 +307,12 @@ class SignUpScreen extends StatelessWidget {
                         child: CustomButton(
                           onPressed: () async {
                             // Helper.toScreen(context, OTPScreen());
-                            if(formKey.currentState!.validate() && birthDate.isNotEmpty){
+                            if(formKey.currentState!.validate() && city?.id != null){
                               await provider.register(
+                                name: nameController.text,
                                 email: emailController.text,
                                 password: passwordController.text,
-                                firstName: firstNameController.text,
-                                lastName: lastNameController.text,
-                                birthDate: birthDate,
-                                phoneNumber: phoneController.text,
-                                gender: gender,
-                                profession: professionController.text,
+                                cityId: city!.id,
                               );
                               if(provider.registerSuccessModel?.message?.isNotEmpty?? false) {
                                 CacheHelper.saveData(key: 'token', value: provider.registerSuccessModel!.data!.token).then((value)
@@ -479,10 +322,8 @@ class SignUpScreen extends StatelessWidget {
                                   Helper.toScreen(context, HomePage());
                                 });
                               } else {
-                                showToast(text: provider.registerErrorModel?.message??'');
+                                showToast(text: provider.registerErrorModel?.errors?.email?[0]??'');
                               }
-                            } else if(birthDate.isEmpty){
-                              showToast(text: 'Please select a date');
                             } else {
                               showToast(text: 'Please try again');
                             }
@@ -608,4 +449,60 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildCity() {
+    // ignore: prefer_function_declarations_over_variables
+    final onTap = () async {
+      final city = await Navigator.push(context, MaterialPageRoute(builder: (context) => const CityScreen()),
+      );
+
+      if (city == null) return;
+
+      setState(() => this.city = city);
+    };
+
+    return buildCityPicker(
+      child: city == null
+          ? buildListTile(title: 'No City', onTap: onTap)
+          : buildListTile(
+        title: city!.name,
+        onTap: onTap,
+      ),
+    );
+  }
+
+  Widget buildListTile({
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      onTap: onTap,
+      title: Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(color: Colors.black, fontSize: 18),
+      ),
+      trailing: Icon(Icons.arrow_drop_down, color: Colors.black),
+    );
+  }
+
+  Widget buildCityPicker({
+    required Widget child,
+  }) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Select City',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Card(margin: EdgeInsets.zero, child: child),
+        ],
+      );
 }

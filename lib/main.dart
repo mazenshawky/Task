@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/core/Util/netWork/remote/dio.dart';
+import 'package:mono/provider/categories_provider.dart';
+import 'package:mono/provider/city_provider.dart';
 import 'package:mono/provider/my_services_provider.dart';
 import 'package:mono/provider/signup_provider.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +32,8 @@ Future<void> main() async {
              ChangeNotifierProvider(create: (context) => InteriorProvider()),
              ChangeNotifierProvider(create: (context) => SignUpProvider()),
              ChangeNotifierProvider(create: (context) => SignInProvider()),
+             ChangeNotifierProvider(create: (context) => CategoriesProvider()),
+             ChangeNotifierProvider(create: (context) => CityProvider()),
        ],
            child: const MyApp())));
 }

@@ -11,26 +11,18 @@ class SignUpProvider extends ChangeNotifier {
   RegisterErrorModel? registerErrorModel;
 
   Future<Either<RegisterErrorModel, RegisterSuccessModel>> userRegister({
+    required String name,
     required String email,
     required String password,
-    required String firstName,
-    required String lastName,
-    required String birthDate,
-    required String phoneNumber,
-    required String gender,
-    required String profession,
+    required int cityId,
   }) async {
     final response = await DioHelper.post(
       endPoint: registerEndPoint,
       data: {
+        'name': name,
         'email': email,
         'password': password,
-        'first_name': firstName,
-        'last_name': lastName,
-        'birth_date': birthDate,
-        'phone_number': phoneNumber,
-        'gender': gender,
-        'profession': profession,
+        'city_id': cityId,
       },
     );
     try {
@@ -49,24 +41,16 @@ class SignUpProvider extends ChangeNotifier {
   }
 
   register({
+    required String name,
     required String email,
     required String password,
-    required String firstName,
-    required String lastName,
-    required String birthDate,
-    required String phoneNumber,
-    required String gender,
-    required String profession,
+    required int cityId,
   }) async {
     (await userRegister(
+        name: name,
         email: email,
         password: password,
-        firstName: firstName,
-        lastName: lastName,
-        birthDate: birthDate,
-        phoneNumber: phoneNumber,
-        gender: gender,
-        profession: profession)).fold(
+        cityId: cityId)).fold(
             (left) => {
           print(registerErrorModel!.message),
           notifyListeners()
