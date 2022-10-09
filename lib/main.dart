@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/core/Util/netWork/remote/dio.dart';
 import 'package:mono/provider/my_services_provider.dart';
 import 'package:mono/provider/signup_provider.dart';
@@ -14,6 +15,8 @@ import 'utilites/constants.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  await CacheHelper.init();
+  token = CacheHelper.getData(key: 'token');
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, DeviceOrientation.portraitDown
   ]).then((value) => runApp (

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/screens/homepage/homepage.dart';
 import 'package:mono/screens/onboarding/onboarding_screen.dart';
+import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
 import 'package:mono/widgets/custom_parent_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +18,11 @@ class _SplashState extends State<Splash> {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       Future.delayed(Duration(seconds: 3),()async{
-        Helper.toRemoveUntiScreen(context, OnBoardingScreen());
+        if(token == null) {
+          Helper.toRemoveUntiScreen(context, OnBoardingScreen());
+        }else {
+          Helper.toRemoveUntiScreen(context, HomePage());
+        }
     });
     }catch(e){
       print(e);

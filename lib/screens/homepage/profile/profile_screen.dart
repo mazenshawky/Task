@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/screens/account/signin_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
@@ -233,7 +234,10 @@ class ProfileScreen extends StatelessWidget {
                   padding: kHrPadding,
                   child: CustomInkWell(
                     onTap: (){
-                      Helper.toScreen(context, SignInScreen());
+                      CacheHelper.removeData(key: 'token',).then((value) {
+                        if(value)
+                          Helper.toScreen(context, SignInScreen());
+                      });
                     },
                     child: Container(
                       height: 50,

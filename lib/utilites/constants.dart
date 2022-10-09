@@ -82,3 +82,5 @@ const Color kGoogleColor = Color(0xFFEA4335);
 const Color kAccentColor = Color(0xffFCAAAB);
 const Color kAccentColorVariant = Color(0xffF7A3A2);
 const Color kUnreadChatBG = Color(0xffEE1D1D);
+
+String? token;

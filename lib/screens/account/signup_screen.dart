@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/provider/auth_provider.dart';
 import 'package:mono/provider/signup_provider.dart';
 import 'package:mono/screens/homepage/homepage.dart';
@@ -471,7 +472,12 @@ class SignUpScreen extends StatelessWidget {
                                 profession: professionController.text,
                               );
                               if(provider.registerSuccessModel?.message?.isNotEmpty?? false) {
-                                Helper.toScreen(context, HomePage());
+                                CacheHelper.saveData(key: 'token', value: provider.registerSuccessModel!.data!.token).then((value)
+                                {
+                                  token = provider.registerSuccessModel!.data!.token!;
+
+                                  Helper.toScreen(context, HomePage());
+                                });
                               } else {
                                 showToast(text: provider.registerErrorModel?.message??'');
                               }

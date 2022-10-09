@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/provider/auth_provider.dart';
 import 'package:mono/provider/signin_provider.dart';
 import 'package:mono/screens/homepage/homepage.dart';
@@ -181,7 +182,12 @@ class SignInScreen extends StatelessWidget {
                                   password: passwordController.text,
                                 );
                                 if(provider.loginSuccessModel?.message?.token?.isNotEmpty?? false) {
-                                  // Helper.toScreen(context, HomePage());
+                                  CacheHelper.saveData(key: 'token', value: provider.loginSuccessModel!.message!.token!).then((value)
+                                  {
+                                    token = provider.loginSuccessModel!.message!.token!;
+
+                                    Helper.toScreen(context, HomePage());
+                                  });
                                 } else {
                                   showToast(text: provider.loginErrorModel!.errors!.data!);
                                 }
