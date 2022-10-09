@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mono/provider/auth_provider.dart';
 import 'package:mono/provider/signup_provider.dart';
+import 'package:mono/screens/homepage/homepage.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
 import 'package:mono/utilites/validator.dart';
@@ -12,6 +12,7 @@ import 'package:mono/widgets/custom_parent_widget.dart';
 import 'package:mono/widgets/custom_rich_text.dart';
 import 'package:mono/widgets/custom_text.dart';
 import 'package:mono/widgets/custom_textfield.dart';
+import 'package:mono/widgets/custom_toast.dart';
 import 'package:provider/provider.dart';
 
 import 'otp_screen.dart';
@@ -456,10 +457,10 @@ class SignUpScreen extends StatelessWidget {
                       builder: (context, provider, child) => Container(
                         padding: kHrPadding,
                         child: CustomButton(
-                          onPressed: () {
+                          onPressed: () async {
                             // Helper.toScreen(context, OTPScreen());
                             if(formKey.currentState!.validate() && birthDate.isNotEmpty){
-                              provider.userRegister(
+                              await provider.register(
                                 email: emailController.text,
                                 password: passwordController.text,
                                 firstName: firstNameController.text,
@@ -469,27 +470,15 @@ class SignUpScreen extends StatelessWidget {
                                 gender: gender,
                                 profession: professionController.text,
                               );
-                              Helper.toScreen(context, HomePage());
+                              if(provider.registerSuccessModel?.message?.isNotEmpty?? false) {
+                                Helper.toScreen(context, HomePage());
+                              } else {
+                                showToast(text: provider.registerErrorModel?.message??'');
+                              }
                             } else if(birthDate.isEmpty){
-                              Fluttertoast.showToast(
-                                msg: 'Please select a date',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 2,
-                                backgroundColor: Colors.grey,
-                                textColor: Colors.black,
-                                fontSize: 15,
-                              );
+                              showToast(text: 'Please select a date');
                             } else {
-                              Fluttertoast.showToast(
-                                msg: 'Please try again',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 2,
-                                backgroundColor: Colors.grey,
-                                textColor: Colors.black,
-                                fontSize: 15,
-                              );
+                              showToast(text: 'Please try again');
                             }
                           },
                           btnHeight: 46,

@@ -36,6 +36,8 @@ String? emailField(String? fieldContent) { //<-- add String? as a return type
 String? phoneField(String? fieldContent) { //<-- add String? as a return type
   if(fieldContent!.isEmpty) {
     return 'Invalid Phone Number';
+  } else if (fieldContent.length < 11) {
+    return "Phone number should be at least 11 characters";
   }
   return null;
 }
@@ -44,8 +46,8 @@ String? validatePassword(String? value) {
   oldPassValue = value;
   if (value!.isEmpty) {
     return 'Invalid password';
-  } else if (value.length < 6) {
-    return "Password should be between 6-20 characters";
+  } else if (value.length < 8) {
+    return "Password should be between 8-20 characters";
   } else{
     return null;
   }

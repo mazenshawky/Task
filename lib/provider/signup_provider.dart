@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:mono/core/Util/netWork/remote/dio.dart';
 import 'package:mono/core/Util/netWork/remote/endpoint.dart';
@@ -5,11 +6,11 @@ import 'package:mono/models/register_model.dart';
 
 class SignUpProvider extends ChangeNotifier {
 
-  RegisterModel? registerModel;
+  RegisterSuccessModel? registerSuccessModel;
 
-  bool loggedIn = false;
+  RegisterErrorModel? registerErrorModel;
 
-  void userRegister({
+  Future<Either<RegisterErrorModel, RegisterSuccessModel>> userRegister({
     required String email,
     required String password,
     required String firstName,
@@ -18,11 +19,10 @@ class SignUpProvider extends ChangeNotifier {
     required String phoneNumber,
     required String gender,
     required String profession,
-  }) {
-    DioHelper.post(
+  }) async {
+    final response = await DioHelper.post(
       endPoint: registerEndPoint,
-      data:
-      {
+      data: {
         'email': email,
         'password': password,
         'first_name': firstName,
@@ -32,15 +32,48 @@ class SignUpProvider extends ChangeNotifier {
         'gender': gender,
         'profession': profession,
       },
-    ).then((value) {
-      print(value.data);
-      registerModel = RegisterModel.fromJson(value.data);
-      loggedIn = true;
-      notifyListeners();
-    }).catchError((error) {
-      print(error.toString());
-      loggedIn = false;
-      notifyListeners();
-    });
+    );
+    try {
+      if (response['message'] != 'please correct the data and try again') {
+        registerSuccessModel = RegisterSuccessModel.fromJson(response);
+        return Right(RegisterSuccessModel.fromJson(response));
+      } else {
+
+        registerErrorModel = RegisterErrorModel.fromJson(response);
+        return Left(RegisterErrorModel.fromJson(response));
+      }
+    } catch (error) {
+      registerErrorModel = RegisterErrorModel.fromJson(response);
+      return Left(RegisterErrorModel.fromJson(response));
+    }
+  }
+
+  register({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String birthDate,
+    required String phoneNumber,
+    required String gender,
+    required String profession,
+  }) async {
+    (await userRegister(
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: birthDate,
+        phoneNumber: phoneNumber,
+        gender: gender,
+        profession: profession)).fold(
+            (left) => {
+          print(registerErrorModel!.message),
+          notifyListeners()
+        },
+            (right) => {
+          print(registerSuccessModel!.message),
+          notifyListeners()
+        });
   }
 }

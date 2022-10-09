@@ -1,31 +1,29 @@
-class RegisterSuccessModel {
-  String? message;
-  Data? data;
+class LoginSuccessModel {
+  Message? message;
 
-  RegisterSuccessModel({this.message, this.data});
+  LoginSuccessModel({this.message});
 
-  RegisterSuccessModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  LoginSuccessModel.fromJson(Map<String, dynamic> json) {
+    message =
+    json['message'] != null ? new Message.fromJson(json['message']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
+    if (this.message != null) {
+      data['message'] = this.message!.toJson();
     }
     return data;
   }
 }
 
-class Data {
+class Message {
   String? token;
   User? user;
 
-  Data({this.token, this.user});
+  Message({this.token, this.user});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Message.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
@@ -43,7 +41,7 @@ class Data {
 class User {
   String? firstName;
   String? lastName;
-  Null? balance;
+  String? balance;
   String? birthDate;
   String? email;
   String? phoneNumber;
@@ -89,13 +87,13 @@ class User {
   }
 }
 
-class RegisterErrorModel {
+class LoginErrorModel {
   String? message;
   Errors? errors;
 
-  RegisterErrorModel({this.message, this.errors});
+  LoginErrorModel({this.message, this.errors});
 
-  RegisterErrorModel.fromJson(Map<String, dynamic> json) {
+  LoginErrorModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     errors =
     json['errors'] != null ? new Errors.fromJson(json['errors']) : null;
@@ -112,23 +110,17 @@ class RegisterErrorModel {
 }
 
 class Errors {
-  List<String>? birthDate;
-  List<String>? email;
-  List<String>? phoneNumber;
+  String? data;
 
-  Errors({this.birthDate, this.email, this.phoneNumber});
+  Errors({this.data});
 
   Errors.fromJson(Map<String, dynamic> json) {
-    birthDate = json['birth_date'] == null ?[] : List<String>.from(json['birth_date'].map((x) => x));
-    email = json['email'] == null ?[] : List<String>.from(json['email'].map((x) => x));
-    phoneNumber = json['phone_number'] == null ?[] : List<String>.from(json['phone_number'].map((x) => x));
+    data = json['data'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['birth_date'] = this.birthDate;
-    data['email'] = this.email;
-    data['phone_number'] = this.phoneNumber;
+    data['data'] = this.data;
     return data;
   }
 }

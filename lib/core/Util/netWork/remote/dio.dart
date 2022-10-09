@@ -100,40 +100,41 @@ class DioHelper {
       final r = await call.call();
       debugPrint("Response_Data => ${r.data}");
       debugPrint("Response_Code => ${r.statusCode}");
-      if (r.data['status']['type'] == '0' &&
-          r.data['data']['data'] != null &&
-          r.data['data']['data'].isEmpty) {
+      if (
+          r.data['data'] != null &&
+          r.data['data'].isEmpty) {
         return r.data;
       }
-      if (r.data['status']['type'] == '0') {
-        dynamic title = r.data['status']['title'];
-        print(title);
-        throw PrimaryServerException(
-          message: title == null
-              ? ''
-              : title is String
-              ? title
-              : r.data['status']['title']['ar'],
-          code: r.statusCode ?? 500,
-          error: title == null
-              ? ''
-              : title is String
-              ? title
-              : r.data['status']['title']['en'],
-        );
-      } else {
+      // if (r.data['status']['type'] == '0') {
+      //   dynamic title = r.data['status']['title'];
+      //   print(title);
+      //   throw PrimaryServerException(
+      //     message: title == null
+      //         ? ''
+      //         : title is String
+      //         ? title
+      //         : r.data['status']['title']['ar'],
+      //     code: r.statusCode ?? 500,
+      //     error: title == null
+      //         ? ''
+      //         : title is String
+      //         ? title
+      //         : r.data['status']['title']['en'],
+      //   );
+      // }
+      else {
         return r.data;
       }
     } on DioError catch (e) {
       debugPrint("Error_Message => ${e.message}");
       debugPrint("Error_Error => ${e.error.toString()}");
       debugPrint("Error_Type => ${e.type.toString()}");
-
-      throw PrimaryServerException(
-        code: 100,
-        error: e.error.toString(),
-        message: e.message,
-      );
+      // throw PrimaryServerException(
+      //   code: 100,
+      //   error: e.error.toString(),
+      //   message: e.message,
+      // );
+      return e.response!.data;
     }
   }
 }

@@ -8,6 +8,7 @@ import 'provider/auth_provider.dart';
 import 'provider/cart_provider.dart';
 import 'provider/homepage_provider.dart';
 import 'provider/interior_provider.dart';
+import 'provider/signin_provider.dart';
 import 'screens/splash/splash.dart';
 import 'utilites/constants.dart';
 Future<void> main() async {
@@ -25,6 +26,7 @@ Future<void> main() async {
              ChangeNotifierProvider(create: (context) => CartProvider()),
              ChangeNotifierProvider(create: (context) => InteriorProvider()),
              ChangeNotifierProvider(create: (context) => SignUpProvider()),
+             ChangeNotifierProvider(create: (context) => SignInProvider()),
        ],
            child: const MyApp())));
 }
