@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       Future.delayed(Duration(seconds: 3),()async{
         Helper.toRemoveUntiScreen(context, OnBoardingScreen());
-      });
+    });
     }catch(e){
       print(e);
       }
