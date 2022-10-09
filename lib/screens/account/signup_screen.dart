@@ -13,10 +13,19 @@ import 'package:mono/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 import 'otp_screen.dart';
+
 class SignUpScreen extends StatelessWidget {
-   SignUpScreen({Key? key}) : super(key: key);
-   final phoneController = TextEditingController();
-   final passwordController = TextEditingController();
+  SignUpScreen({Key? key}) : super(key: key);
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final professionController = TextEditingController();
+  String birthDateController = '';
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  String genderController = '';
+  DateTime currentDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return CustomParentWidget(
@@ -32,12 +41,15 @@ class SignUpScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             centerTitle: true,
             leading: CustomInkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset("assets/icons/ic_back.png",scale: 2,),
+                child: Image.asset(
+                  "assets/icons/ic_back.png",
+                  scale: 2,
+                ),
               ),
             ),
             title: CustomText(
@@ -47,222 +59,514 @@ class SignUpScreen extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          body: Consumer<AuthProvider>(
-              builder: (context,authProvider, child) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-50,),
-                    //welcome back
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: CustomText(
-                        title: "welcome back",
-                        fontSize: 18,
-                        color: blueColor,
-                        fontWeight: FontWeight.w500,
-                      ),
+          body: Consumer<AuthProvider>(builder: (context, authProvider, child) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //welcome back
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      title: "welcome back",
+                      fontSize: 18,
+                      color: blueColor,
+                      fontWeight: FontWeight.w500,
                     ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-50,),
-                    //phone number
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "phone number",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(height: Helper.setHeight(context)*0.10-70,),
-                          CustomTextField(
-                            controller: phoneController,
-                            keyboardType: TextInputType.phone,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: [AutofillHints.telephoneNumberNational],
-                            onChanged: (_) {},
-                            validation: phoneField,
-                            hintText: "phone number",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                            suffixIcon: CustomInkWell(
-                              onTap: (){},
-                              child:  Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Image.asset("assets/icons/ic_phone.png",scale: 2,)
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-30,),
-                    //password
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "password",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(height: Helper.setHeight(context)*0.10-70,),
-                          CustomTextField(
-                            obscureText: authProvider.isToggle1,
-                            controller: passwordController,
-                            keyboardType: TextInputType.visiblePassword,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: [AutofillHints.password],
-                            onChanged: (_) {},
-                            validation: validatePassword,
-                            hintText: "password",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                            suffixIcon: CustomInkWell(
-                              onTap: (){
-                                authProvider.toggleDone(index: 1);
-                              },
-                              child:  Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: authProvider.isToggle1?
-                                  Image.asset("assets/icons/ic_hide.png",scale: 1.7,):
-                                  Image.asset("assets/icons/ic_seen.png",scale: 1.7,color: blackColor,)
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10+10),
-                    //Sign up
-                    Container(
-                      padding: kHrPadding,
-                      child: CustomButton(
-                        onPressed: () {
-                             Helper.toScreen(context, OTPScreen());
-                        },
-                        btnHeight: 46,
-                        btnWidth: double.infinity,
-                        btnRadius: 26,
-                        title: "Sign up",
-                        fontWeight: FontWeight.w500,
-                        btnColor: blueColor,
-                        textColor: whiteColor,
-                        fontSize: 15,
-                      ),
-                    ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-40,),
-                    //Or by social media
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        title: "Or by social media",
-                        fontSize: 13,
-                        color: greyColor,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-50,),
-                    //Social Buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //first name
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //google
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: yellowColor,
-                                  width: 1
-                              )
-                          ),
-                          child: Center(
-                            child: Image.asset("assets/icons/ic_google.png",scale: 2,),
-                          ),
+                        CustomText(
+                          title: "first name",
+                          fontSize: 15,
+                          color: blackColor,
                         ),
                         //Space
-                        SizedBox(width: 20,),
-                        //fb
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: yellowColor,
-                                  width: 1
-                              )
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: firstNameController,
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [AutofillHints.name],
+                          onChanged: (_) {},
+                          validation: firstNameField,
+                          hintText: "first name",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                          suffixIcon: CustomInkWell(
+                            onTap: () {},
+                            child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  "assets/icons/ic_profile.png",
+                                  scale: 2,
+                                )),
                           ),
-                          child: Center(
-                            child: Image.asset("assets/icons/ic_fb.png",scale: 2,),
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //last name
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "last name",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: lastNameController,
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [AutofillHints.name],
+                          onChanged: (_) {},
+                          validation: lastNameField,
+                          hintText: "last name",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                          suffixIcon: CustomInkWell(
+                            onTap: () {},
+                            child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  "assets/icons/ic_profile.png",
+                                  scale: 2,
+                                )),
                           ),
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //email
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "email",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [AutofillHints.email],
+                          onChanged: (_) {},
+                          validation: emailField,
+                          hintText: "email",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                          suffixIcon: CustomInkWell(
+                            onTap: () {},
+                            child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  "assets/icons/ic_mail.png",
+                                  scale: 2,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //profession
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "phone number",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: phoneController,
+                          keyboardType: TextInputType.phone,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [
+                            AutofillHints.telephoneNumberNational
+                          ],
+                          onChanged: (_) {},
+                          validation: phoneField,
+                          hintText: "phone number",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                          suffixIcon: CustomInkWell(
+                            onTap: () {},
+                            child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  "assets/icons/ic_phone.png",
+                                  scale: 2,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //email
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "profession",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: professionController,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          onChanged: (_) {},
+                          validation: professionField,
+                          hintText: "profession",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                          suffixIcon: CustomInkWell(
+                            onTap: () {},
+                            child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  "assets/icons/ic_briefcase.png",
+                                  scale: 2,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //password
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "password",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          obscureText: authProvider.isToggle1,
+                          controller: passwordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [AutofillHints.password],
+                          onChanged: (_) {},
+                          validation: validatePassword,
+                          hintText: "password",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                          suffixIcon: CustomInkWell(
+                            onTap: () {
+                              authProvider.toggleDone(index: 1);
+                            },
+                            child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: authProvider.isToggle1
+                                    ? Image.asset(
+                                  "assets/icons/ic_hide.png",
+                                  scale: 1.7,
+                                )
+                                    : Image.asset(
+                                  "assets/icons/ic_seen.png",
+                                  scale: 1.7,
+                                  color: blackColor,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //birth date
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "birth date",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomButton(
+                          onPressed: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: birthDateController.isEmpty
+                                  ? currentDate
+                                  : DateTime.parse(birthDateController),
+                              firstDate: DateTime(1940),
+                              lastDate: DateTime.now(),
+                            );
+                            if (pickedDate == null) return;
+                            birthDateController =
+                                pickedDate.toString().split(" ")[0];
+                            authProvider.datePicked();
+                          },
+                          title: birthDateController.isEmpty
+                              ? 'Select a date'
+                              : '${birthDateController}',
+                          textColor: blueColor,
                         ),
                       ],
                     ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-50,),
-                    //
-                    CustomInkWell(
-                      onTap: (){
-                        Navigator.pop(context);
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 80,
+                  ),
+                  //gender
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "gender",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        Row(
+                          children: [
+                            Radio(
+                              value: 1,
+                              groupValue: authProvider.value,
+                              onChanged: (value){
+                                authProvider.chooseGender(value);
+                                genderController = 'male';
+                              },
+                              activeColor: blueColor,
+                            ),
+                            // const SizedBox(width: 5.0),
+                            const Text('male'),
+                            const SizedBox(width: 30.0),
+                            Radio(
+                              value: 2,
+                              groupValue: authProvider.value,
+                              onChanged: (value){
+                                authProvider.chooseGender(value);
+                                genderController = 'female';
+                              },
+                              activeColor: blueColor,
+                            ),
+                            const Text('female'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: Helper.setHeight(context) * 0.03 + 10),
+                  //Sign up
+                  Container(
+                    padding: kHrPadding,
+                    child: CustomButton(
+                      onPressed: () {
+                        Helper.toScreen(context, OTPScreen());
                       },
-                      child: CustomRichText(
-                        titleText: "I have account  ",
-                        titleFontSize: 14,
-                        titleColor: blackColor,
-                        children: [
-                          TextSpan(
-                              text: "Sign in",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: blueColor
-                              )
-                          )
-                        ],
-                      ),
+                      btnHeight: 46,
+                      btnWidth: double.infinity,
+                      btnRadius: 26,
+                      title: "Sign up",
+                      fontWeight: FontWeight.w500,
+                      btnColor: blueColor,
+                      textColor: whiteColor,
+                      fontSize: 15,
                     ),
-                    //Space
-                    SizedBox(height: Helper.setHeight(context)*0.10-30,),
-                    //Enter as a guest
-                    Container(
-                      padding: kHrPadding,
-                      child: CustomButton(
-                        onPressed: () {
-                          //    Helper.toScreen(context, SignInScreen());
-                        },
-                        btnHeight: 46,
-                        btnWidth: double.infinity,
-                        btnRadius: 26,
-                        title: "Enter as a guest",
-                        fontWeight: FontWeight.w500,
-                        btnBorderColor: blueColor,
-                        textColor: blueColor,
-                        fontSize: 15,
-                      ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 40,
+                  ),
+                  //Or by social media
+                  Container(
+                    alignment: Alignment.center,
+                    child: CustomText(
+                      title: "Or by social media",
+                      fontSize: 13,
+                      color: greyColor,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ],
-                ),
-              );
-            }
-          ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //Social Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //google
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: yellowColor, width: 1)),
+                        child: Center(
+                          child: Image.asset(
+                            "assets/icons/ic_google.png",
+                            scale: 2,
+                          ),
+                        ),
+                      ),
+                      //Space
+                      SizedBox(
+                        width: 20,
+                      ),
+                      //fb
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: yellowColor, width: 1)),
+                        child: Center(
+                          child: Image.asset(
+                            "assets/icons/ic_fb.png",
+                            scale: 2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //
+                  CustomInkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: CustomRichText(
+                      titleText: "I have account  ",
+                      titleFontSize: 14,
+                      titleColor: blackColor,
+                      children: [
+                        TextSpan(
+                            text: "Sign in",
+                            style: TextStyle(fontSize: 14, color: blueColor))
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 30,
+                  ),
+                  //Enter as a guest
+                  Container(
+                    padding: kHrPadding,
+                    child: CustomButton(
+                      onPressed: () {
+                        //    Helper.toScreen(context, SignInScreen());
+                      },
+                      btnHeight: 46,
+                      btnWidth: double.infinity,
+                      btnRadius: 26,
+                      title: "Enter as a guest",
+                      fontWeight: FontWeight.w500,
+                      btnBorderColor: blueColor,
+                      textColor: blueColor,
+                      fontSize: 15,
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                ],
+              ),
+            );
+          }),
         ),
       ),
     );

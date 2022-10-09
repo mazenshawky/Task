@@ -19,4 +19,15 @@ class AuthProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  datePicked(){
+    notifyListeners();
+  }
+
+  Object? value = 1;
+
+  chooseGender(Object? choice){
+    value = choice;
+    notifyListeners();
+  }
+
 }

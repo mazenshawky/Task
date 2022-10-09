@@ -14,6 +14,13 @@ String? lastNameField(String? fieldContent) { //<-- add String? as a return type
   return null;
 }
 
+String? professionField(String? fieldContent) { //<-- add String? as a return type
+  if(fieldContent!.isEmpty) {
+    return 'Invalid Profession';
+  }
+  return null;
+}
+
 String? emailField(String? fieldContent) { //<-- add String? as a return type
   String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regExp = new RegExp(pattern);
