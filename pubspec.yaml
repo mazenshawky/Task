@@ -41,6 +41,7 @@ dependencies:
   carousel_slider: ^4.1.1
   pin_code_text_field: ^1.8.0
   dio: ^4.0.6
+  fluttertoast: ^8.0.9
 
 
 dev_dependencies:

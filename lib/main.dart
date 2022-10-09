@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/core/Util/netWork/remote/dio.dart';
 import 'package:mono/provider/my_services_provider.dart';
+import 'package:mono/provider/signup_provider.dart';
 import 'package:provider/provider.dart';
 import 'provider/auth_provider.dart';
 import 'provider/cart_provider.dart';
@@ -10,6 +12,7 @@ import 'screens/splash/splash.dart';
 import 'utilites/constants.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, DeviceOrientation.portraitDown
   ]).then((value) => runApp (
@@ -21,6 +24,7 @@ Future<void> main() async {
              ChangeNotifierProvider(create: (context) => MyServicesProvider()),
              ChangeNotifierProvider(create: (context) => CartProvider()),
              ChangeNotifierProvider(create: (context) => InteriorProvider()),
+             ChangeNotifierProvider(create: (context) => SignUpProvider()),
        ],
            child: const MyApp())));
 }

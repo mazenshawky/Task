@@ -4,43 +4,21 @@ import 'package:flutter/material.dart';
 import '../../../error/exceptions.dart';
 import 'endpoint.dart';
 
+class DioHelper {
+  static late Dio dio;
 
-abstract class DioHelper {
-  Future<dynamic> post({
-    String? base,
-    required String endPoint,
-    dynamic data,
-    dynamic query,
-    String? token,
-    ProgressCallback? progressCallback,
-    CancelToken? cancelToken,
-    int? timeOut,
-    bool isMultipart = false,
-  });
-
-  Future<dynamic> get({
-    String? base,
-    required String endPoint,
-    dynamic data,
-    dynamic query,
-    String? token,
-    CancelToken? cancelToken,
-    int? timeOut,
-    bool isMultipart = false,
-  });
-}
-
-class DioImpl extends DioHelper {
-  final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: '$baseApiUrl$version',
-      receiveDataWhenStatusError: true,
-      connectTimeout: 5000,
-    ),
-  );
+  static init(){
+    dio = Dio(
+      BaseOptions(
+        baseUrl: '$baseApiUrl$version',
+        receiveDataWhenStatusError: true,
+        connectTimeout: 5000,
+      ),
+    );
+  }
 
   @override
-  Future<dynamic> get({
+  static Future<dynamic> get({
     String? base,
     required String endPoint,
     dynamic data,
@@ -77,7 +55,7 @@ class DioImpl extends DioHelper {
   }
 
   @override
-  Future<dynamic> post({
+  static Future<dynamic> post({
     String? base,
     required String endPoint,
     dynamic data,
@@ -114,10 +92,8 @@ class DioImpl extends DioHelper {
       ),
     );
   }
-}
 
-extension on DioHelper {
-  Future request({
+  static Future request({
     required Future<Response> Function() call,
   }) async {
     try {
