@@ -19,8 +19,6 @@ import 'package:mono/widgets/custom_textfield.dart';
 import 'package:mono/widgets/custom_toast.dart';
 import 'package:provider/provider.dart';
 
-import 'otp_screen.dart';
-
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
 
@@ -35,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final passwordController = TextEditingController();
 
-  City? city;
+  Data? city;
 
   var formKey = GlobalKey<FormState>();
 
@@ -306,13 +304,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         padding: kHrPadding,
                         child: CustomButton(
                           onPressed: () async {
-                            // Helper.toScreen(context, OTPScreen());
                             if(formKey.currentState!.validate() && city?.id != null){
                               await provider.register(
                                 name: nameController.text,
                                 email: emailController.text,
                                 password: passwordController.text,
-                                cityId: city!.id,
+                                cityId: city!.id!,
                               );
                               if(provider.registerSuccessModel?.message?.isNotEmpty?? false) {
                                 CacheHelper.saveData(key: 'token', value: provider.registerSuccessModel!.data!.token).then((value)
@@ -324,6 +321,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               } else {
                                 showToast(text: provider.registerErrorModel?.errors?.email?[0]??'');
                               }
+                            } else if(city?.id == null){
+                              showToast(text: 'Please select a city');
                             } else {
                               showToast(text: 'Please try again');
                             }
@@ -453,6 +452,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget buildCity() {
     // ignore: prefer_function_declarations_over_variables
     final onTap = () async {
+      final provider = Provider.of<CityProvider>(context, listen: false);
+      await provider.getCities();
       final city = await Navigator.push(context, MaterialPageRoute(builder: (context) => const CityScreen()),
       );
 
@@ -465,7 +466,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: city == null
           ? buildListTile(title: 'No City', onTap: onTap)
           : buildListTile(
-        title: city!.name,
+        title: city!.name!,
         onTap: onTap,
       ),
     );

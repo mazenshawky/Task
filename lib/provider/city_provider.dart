@@ -1,30 +1,24 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:mono/core/Util/netWork/remote/dio.dart';
 import 'package:mono/models/city_model.dart';
 
+import '../core/Util/netWork/remote/endpoint.dart';
+
 class CityProvider with ChangeNotifier {
-CityProvider() {
-    loadCountries().then((cities) {
-      _cities = cities;
+
+  City? citiesModel;
+
+  Future<void> getCities() async {
+    final response = await DioHelper.get(endPoint: citiesEndPoint);
+    print(response);
+    try {
+      if (response['data'] != []) {
+        citiesModel = City.fromJson(response);
+        notifyListeners();
+      }
+    } catch (error) {
+      print(error.toString());
       notifyListeners();
-    });
-  }
-
-  List<City> _cities = [];
-
-  List<City> get cities => _cities;
-
-  Future loadCountries() async {
-    final data = await rootBundle.loadString('assets/cities/cities.json');
-    final citiesJson = json.decode(data);
-
-    return citiesJson.keys.map<City>((code) {
-      final json = citiesJson[code];
-      final newJson = json..addAll({'code': code.toLowerCase()});
-
-      return City.fromJson(newJson);
-    }).toList();
+    }
   }
 }

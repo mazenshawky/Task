@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mono/models/city_model.dart';
 
 class CityListTileWidget extends StatelessWidget {
-  final City city;
-  final ValueChanged<City> onSelectedCity;
+  final Data city;
+  final ValueChanged<Data> onSelectedCity;
 
   const CityListTileWidget({
     Key? key,
@@ -18,7 +18,7 @@ class CityListTileWidget extends StatelessWidget {
     return ListTile(
       onTap: () => onSelectedCity(city),
       title: Text(
-        city.name,
+        city.name!,
         style: style,
       ),
     );

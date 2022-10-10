@@ -3,6 +3,7 @@ const String version = '/v1';
 const String loginEndPoint = '/auth/login';
 const String registerEndPoint = '/auth/register';
 const String categoriesEndPoint = '/categories';
+const String citiesEndPoint = '/cities';
 // const String profileEndPoint = '/auth/profile-info';
 //
 // const String updateProfileEndPoint = '/auth/update-info';

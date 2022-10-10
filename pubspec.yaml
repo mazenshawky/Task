@@ -43,6 +43,7 @@ dependencies:
   dio: ^4.0.6
   fluttertoast: ^8.0.9
   dartz: ^0.10.1
+  conditional_builder_null_safety: ^0.0.6
 
 
 dev_dependencies:
@@ -71,7 +72,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/cities/cities.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
