@@ -74,7 +74,7 @@ class DioHelper {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
-      if (token != null) 'token': token,
+      if (token != null) 'Authorization': 'Bearer $token',
     };
 
     debugPrint('URL => ${dio.options.baseUrl + endPoint}');

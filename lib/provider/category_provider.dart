@@ -19,4 +19,14 @@ class CategoryProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Map<int?, String?> categoriesMap = {};
+
+  void setCategoriesMap(){
+    categoryModel!.data!.forEach((category) => categoriesMap[category.id] = category.name);
+  }
+
+  int? getCategoryId(String? value){
+    return categoriesMap.keys.firstWhere((k) => categoriesMap[k] == value, );
+  }
 }

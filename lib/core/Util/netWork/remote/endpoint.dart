@@ -5,6 +5,7 @@ const String registerEndPoint = '/auth/register';
 const String categoriesEndPoint = '/categories';
 const String citiesEndPoint = '/cities';
 const String servicesEndPoint = '/services';
+const String addServiceEndPoint = '/services/add';
 // const String profileEndPoint = '/auth/profile-info';
 //
 // const String updateProfileEndPoint = '/auth/update-info';

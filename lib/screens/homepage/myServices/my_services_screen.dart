@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/provider/homepage_provider.dart';
 import 'package:mono/provider/my_services_provider.dart';
+import 'package:mono/screens/homepage/home/add_service_screen.dart';
 import 'package:mono/utilites/constants.dart';
+import 'package:mono/utilites/helper.dart';
 import 'package:mono/widgets/custom_button.dart';
 import 'package:mono/widgets/custom_inkwell_btn.dart';
 import 'package:mono/widgets/custom_text.dart';
@@ -136,7 +138,7 @@ class _MyServicesScreenState extends State<MyServicesScreen>with SingleTickerPro
                 padding: EdgeInsets.symmetric(horizontal: 18,vertical: 15),
                 child: CustomButton(
                   onPressed: () {
-
+                    Helper.toScreen(context, AddServiceScreen());
                   },
                   btnHeight: 46,
                   btnWidth: double.infinity,

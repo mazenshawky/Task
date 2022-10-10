@@ -28,7 +28,9 @@ class _SplashState extends State<Splash> {
           final catProvider = Provider.of<CategoryProvider>(context, listen: false);
           final serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
           await catProvider.getCategories();
+          catProvider.setCategoriesMap();
           await serviceProvider.getServices();
+          // print(catProvider.categories);
           Helper.toRemoveUntiScreen(context, HomePage());
         }
     });

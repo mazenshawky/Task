@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/core/Util/netWork/remote/dio.dart';
+import 'package:mono/provider/add_service_provider.dart';
 import 'package:mono/provider/category_provider.dart';
 import 'package:mono/provider/city_provider.dart';
 import 'package:mono/provider/my_services_provider.dart';
@@ -36,6 +37,7 @@ Future<void> main() async {
              ChangeNotifierProvider(create: (context) => CategoryProvider()),
              ChangeNotifierProvider(create: (context) => CityProvider()),
              ChangeNotifierProvider(create: (context) => ServiceProvider()),
+             ChangeNotifierProvider(create: (context) => AddServiceProvider()),
        ],
            child: const MyApp())));
 }

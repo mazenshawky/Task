@@ -2,7 +2,7 @@
 import 'constants.dart';
 String? firstNameField(String? fieldContent) { //<-- add String? as a return type
   if(fieldContent!.isEmpty) {
-    return 'Invalid First Name';
+    return 'Invalid Name';
   }
   return null;
 }
@@ -17,6 +17,13 @@ String? lastNameField(String? fieldContent) { //<-- add String? as a return type
 String? professionField(String? fieldContent) { //<-- add String? as a return type
   if(fieldContent!.isEmpty) {
     return 'Invalid Profession';
+  }
+  return null;
+}
+
+String? priceField(String? fieldContent) { //<-- add String? as a return type
+  if(fieldContent!.isEmpty) {
+    return 'Invalid Price';
   }
   return null;
 }

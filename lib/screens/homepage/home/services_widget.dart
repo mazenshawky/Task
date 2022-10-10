@@ -16,7 +16,7 @@ class ServicesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: isScreen ? serviceProvider.serviceModel!.data!.length : minListLength(serviceProvider.serviceModel!.data!.length),
+        itemCount: isScreen ? serviceProvider.serviceModel!.data!.length : serviceProvider.minListLength(serviceProvider.serviceModel!.data!.length),
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -111,15 +111,5 @@ class ServicesWidget extends StatelessWidget {
             ],
           );
         });
-  }
-
-  int minListLength(int length){
-    if(length > 3) {
-      return 3;
-    } else if(length >= 1) {
-      return 1;
-    } else {
-      return 0;
-    }
   }
 }

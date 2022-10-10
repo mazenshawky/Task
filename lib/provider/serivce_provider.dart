@@ -19,4 +19,14 @@ class ServiceProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  int minListLength(int length){
+    if(length > 3) {
+      return 3;
+    } else if(length >= 1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }

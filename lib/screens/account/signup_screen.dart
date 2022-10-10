@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(
                       height: Helper.setHeight(context) * 0.10 - 50,
                     ),
-                    //first name
+                    //name
                     Container(
                       padding: kHrPadding,
                       alignment: Alignment.centerLeft,
@@ -120,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             autofillHints: [AutofillHints.name],
                             onChanged: (_) {},
                             validation: firstNameField,
-                            hintText: "first name",
+                            hintText: "name",
                             isUnderlineInputBorder: true,
                             isOutlineInputBorder: false,
                             contentPaddingLeft: 5,
@@ -254,51 +254,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                     ),
-                    //gender
-                    // Container(
-                    //   padding: kHrPadding,
-                    //   alignment: Alignment.centerLeft,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       CustomText(
-                    //         title: "gender",
-                    //         fontSize: 15,
-                    //         color: blackColor,
-                    //       ),
-                    //       //Space
-                    //       SizedBox(
-                    //         height: Helper.setHeight(context) * 0.10 - 70,
-                    //       ),
-                    //       Row(
-                    //         children: [
-                    //           Radio(
-                    //             value: 1,
-                    //             groupValue: authProvider.value,
-                    //             onChanged: (value){
-                    //               authProvider.chooseGender(value);
-                    //               gender = 'male';
-                    //             },
-                    //             activeColor: blueColor,
-                    //           ),
-                    //           // const SizedBox(width: 5.0),
-                    //           const Text('male'),
-                    //           const SizedBox(width: 30.0),
-                    //           Radio(
-                    //             value: 2,
-                    //             groupValue: authProvider.value,
-                    //             onChanged: (value){
-                    //               authProvider.chooseGender(value);
-                    //               gender = 'female';
-                    //             },
-                    //             activeColor: blueColor,
-                    //           ),
-                    //           const Text('female'),
-                    //         ],
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(height: Helper.setHeight(context) * 0.03 + 10),
                     //Sign up
                     Consumer<SignUpProvider>(
