@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/provider/interior_provider.dart';
+import 'package:mono/provider/serivce_provider.dart';
+import 'package:mono/screens/homepage/home/services_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
 import 'package:mono/widgets/custom_inkwell_btn.dart';
 import 'package:mono/widgets/custom_parent_widget.dart';
+import 'package:mono/widgets/custom_rich_text.dart';
 import 'package:mono/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
 import 'offer_box.dart';
 import 'services_widget.dart';
 class InteriorScreen extends StatelessWidget {
-   InteriorScreen({Key? key}) : super(key: key);
+  final ServiceProvider serviceProvider;
+
+  InteriorScreen({
+    required this.serviceProvider,
+    Key? key,
+  }) : super(key: key);
+
 List list =[
   "Design of children's rooms",
   "Living rooms design",
@@ -92,26 +101,31 @@ List list =[
                               fontSize: 16,
                               color: blackColor,
                             ) ,
-                            CustomText(
-                              title: "See all",
-                              fontSize: 12,
-                              color: greyColor,
-                            )
+                            CustomInkWell(
+                              onTap: () {
+                                Helper.toScreen(context, ServicesScreen(serviceProvider: serviceProvider,));
+                              },
+                              child: CustomRichText(
+                                children: [
+                                  TextSpan(
+                                      text: "See all",
+                                      style: TextStyle(fontSize: 12, color: greyColor))
+                                ],
+                              ),
+                            ),
+                            // CustomText(
+                            //   title: "See all",
+                            //   fontSize: 12,
+                            //   color: greyColor,
+                            // )
                           ],
                         ),
                       ),
                       //Space
                       SizedBox(height: Helper.setHeight(context)*0.10-60,),
-                      // ListView.builder(
-                      //     itemCount: 3,
-                      //     shrinkWrap: true,
-                      //     padding: EdgeInsets.symmetric(vertical: 15),
-                      //     physics: BouncingScrollPhysics(),
-                      //     itemBuilder: (context,index){
-                      //       return  Container(
-                      //           padding: EdgeInsets.only(bottom: 15),
-                      //           child: ServicesWidget());
-                      //     }),
+                      Container(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: ServicesWidget(serviceProvider: serviceProvider, isScreen: false,)),
                       //Space
                       SizedBox(height: Helper.setHeight(context)*0.10-70,),
                       //Offer & packages
@@ -146,12 +160,12 @@ List list =[
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              title: "Design of a childern's room for 2 children",
+                              title: serviceProvider.serviceModel!.data!.first.name,
                               fontSize: 12,
                               color: blackColor,
                             ) ,
                             CustomText(
-                              title: "256 EG",
+                              title: serviceProvider.serviceModel!.data!.first.price,
                               fontSize: 20,
                               color: blueColor,
                             )

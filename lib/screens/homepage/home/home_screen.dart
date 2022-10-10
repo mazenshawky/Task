@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/provider/serivce_provider.dart';
+import 'package:mono/screens/homepage/home/services_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
 import 'package:mono/widgets/custom_button.dart';
 import 'package:mono/widgets/custom_inkwell_btn.dart';
 import 'package:mono/widgets/custom_parent_widget.dart';
+import 'package:mono/widgets/custom_rich_text.dart';
 import 'package:mono/widgets/custom_text.dart';
 import 'package:mono/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
@@ -155,7 +157,7 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           CustomInkWell(
                             onTap: (){
-                              Helper.toScreen(context, InteriorScreen());
+                              Helper.toScreen(context, InteriorScreen(serviceProvider: serviceProvider,));
                             },
                             child: CustomText(
                               title: serviceProvider.serviceModel!.data!.first.category,
@@ -222,17 +224,32 @@ class HomeScreen extends StatelessWidget {
                             fontSize: 16,
                             color: blackColor,
                           ) ,
-                          CustomText(
-                            title: "See all",
-                            fontSize: 12,
-                            color: greyColor,
-                          )
+                          CustomInkWell(
+                            onTap: () {
+                              Helper.toScreen(context, ServicesScreen(serviceProvider: serviceProvider,));
+                            },
+                            child: CustomRichText(
+                              children: [
+                                TextSpan(
+                                    text: "See all",
+                                    style: TextStyle(fontSize: 12, color: greyColor))
+                              ],
+                            ),
+                          ),
+                          // InkWell(
+                          //   onTap: (){},
+                          //   child: CustomText(
+                          //     title: "See all",
+                          //     fontSize: 12,
+                          //     color: greyColor,
+                          //   ),
+                          // )
                         ],
                       ),
                     ),
                     //Space
                     SizedBox(height: Helper.setHeight(context)*0.10-60,),
-                    ServicesWidget(servProvider: serviceProvider,),
+                    ServicesWidget(serviceProvider: serviceProvider, isScreen: false,),
                     //Space
                     SizedBox(height: Helper.setHeight(context)*0.10-40,),
                   ],

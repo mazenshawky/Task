@@ -4,17 +4,19 @@ import 'package:mono/utilites/constants.dart';
 import 'package:mono/widgets/custom_button.dart';
 import 'package:mono/widgets/custom_text.dart';
 class ServicesWidget extends StatelessWidget {
-  final ServiceProvider servProvider;
+  final ServiceProvider serviceProvider;
+  final bool isScreen;
 
   const ServicesWidget({
-    required this.servProvider,
+    required this.serviceProvider,
+    required this.isScreen,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: servProvider.serviceModel!.data!.length,
+        itemCount: isScreen ? serviceProvider.serviceModel!.data!.length : minListLength(serviceProvider.serviceModel!.data!.length),
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -48,12 +50,12 @@ class ServicesWidget extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: CustomText(
-                                      title: servProvider.serviceModel!.data![index].name,
+                                      title: serviceProvider.serviceModel!.data![index].name,
                                       fontSize: 12,
                                       color: blackColor,
                                     )) ,
                                 CustomText(
-                                  title: servProvider.serviceModel!.data![index].price,
+                                  title: serviceProvider.serviceModel!.data![index].price,
                                   fontSize: 20,
                                   color: blueColor,
                                 )
@@ -64,7 +66,7 @@ class ServicesWidget extends StatelessWidget {
                                 Expanded(
                                     child: CustomText(
                                       // title: "room for 2 children",
-                                      title: servProvider.serviceModel!.data![index].description,
+                                      title: serviceProvider.serviceModel!.data![index].description,
                                       fontSize: 12,
                                       color: blackColor,
                                     )) ,
@@ -82,7 +84,7 @@ class ServicesWidget extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: CustomText(
-                                      title: servProvider.serviceModel!.data![index].category,
+                                      title: serviceProvider.serviceModel!.data![index].category,
                                       fontSize: 11,
                                       color: greyColor,
                                     )) ,
@@ -109,5 +111,15 @@ class ServicesWidget extends StatelessWidget {
             ],
           );
         });
+  }
+
+  int minListLength(int length){
+    if(length > 3) {
+      return 3;
+    } else if(length >= 1) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }
