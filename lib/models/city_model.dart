@@ -1,10 +1,10 @@
-class City {
+class CityModel {
   Null? message;
   List<Data>? data;
 
-  City({this.message, this.data});
+  CityModel({this.message, this.data});
 
-  City.fromJson(Map<String, dynamic> json) {
+  CityModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     if (json['data'] != null) {
       data = <Data>[];

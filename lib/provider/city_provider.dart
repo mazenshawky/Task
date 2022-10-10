@@ -6,14 +6,14 @@ import '../core/Util/netWork/remote/endpoint.dart';
 
 class CityProvider with ChangeNotifier {
 
-  City? citiesModel;
+  CityModel? citiesModel;
 
   Future<void> getCities() async {
     final response = await DioHelper.get(endPoint: citiesEndPoint);
     print(response);
     try {
       if (response['data'] != []) {
-        citiesModel = City.fromJson(response);
+        citiesModel = CityModel.fromJson(response);
         notifyListeners();
       }
     } catch (error) {

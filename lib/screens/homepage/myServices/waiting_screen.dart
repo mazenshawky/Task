@@ -7,16 +7,16 @@ class WaitingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: 10,
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(vertical: 15),
-          physics: BouncingScrollPhysics(),
-          itemBuilder: (context,index){
-          return  Container(
-            padding: EdgeInsets.only(bottom: 15),
-              child: ServicesWidget());
-          }),
+      // body: ListView.builder(
+      //     itemCount: 10,
+      //     shrinkWrap: true,
+      //     padding: EdgeInsets.symmetric(vertical: 15),
+      //     physics: BouncingScrollPhysics(),
+      //     itemBuilder: (context,index){
+      //     return  Container(
+      //       padding: EdgeInsets.only(bottom: 15),
+      //         child: ServicesWidget());
+      //     }),
     );
   }
 }

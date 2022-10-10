@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/models/city_model.dart';
 import 'package:mono/provider/auth_provider.dart';
+import 'package:mono/provider/category_provider.dart';
 import 'package:mono/provider/city_provider.dart';
+import 'package:mono/provider/serivce_provider.dart';
 import 'package:mono/provider/signup_provider.dart';
 import 'package:mono/screens/account/city_screen.dart';
 import 'package:mono/screens/homepage/homepage.dart';
@@ -313,9 +315,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               );
                               if(provider.registerSuccessModel?.message?.isNotEmpty?? false) {
                                 CacheHelper.saveData(key: 'token', value: provider.registerSuccessModel!.data!.token).then((value)
-                                {
+                                async {
                                   token = provider.registerSuccessModel!.data!.token!;
-
+                                  final catProvider = Provider.of<CategoryProvider>(context, listen: false);
+                                  final serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
+                                  await catProvider.getCategories();
+                                  await serviceProvider.getServices();
                                   Helper.toScreen(context, HomePage());
                                 });
                               } else {

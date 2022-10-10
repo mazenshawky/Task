@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mono/provider/category_provider.dart';
 import 'package:mono/screens/homepage/homepage.dart';
 import 'package:mono/screens/onboarding/onboarding_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
 import 'package:mono/widgets/custom_parent_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../provider/serivce_provider.dart';
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -21,6 +25,10 @@ class _SplashState extends State<Splash> {
         if(token == null) {
           Helper.toRemoveUntiScreen(context, OnBoardingScreen());
         }else {
+          final catProvider = Provider.of<CategoryProvider>(context, listen: false);
+          final serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
+          await catProvider.getCategories();
+          await serviceProvider.getServices();
           Helper.toRemoveUntiScreen(context, HomePage());
         }
     });

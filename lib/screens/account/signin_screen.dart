@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/provider/auth_provider.dart';
+import 'package:mono/provider/category_provider.dart';
 import 'package:mono/provider/signin_provider.dart';
 import 'package:mono/screens/homepage/homepage.dart';
 import 'package:mono/utilites/constants.dart';
@@ -16,6 +17,7 @@ import 'package:mono/widgets/custom_textfield.dart';
 import 'package:mono/widgets/custom_toast.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/serivce_provider.dart';
 import 'forgot_password_screen.dart';
 import 'signup_screen.dart';
 class SignInScreen extends StatelessWidget {
@@ -183,9 +185,12 @@ class SignInScreen extends StatelessWidget {
                                 );
                                 if(provider.loginSuccessModel?.message?.token?.isNotEmpty?? false) {
                                   CacheHelper.saveData(key: 'token', value: provider.loginSuccessModel!.message!.token!).then((value)
-                                  {
+                                  async {
                                     token = provider.loginSuccessModel!.message!.token!;
-
+                                    final catProvider = Provider.of<CategoryProvider>(context, listen: false);
+                                    final serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
+                                    await catProvider.getCategories();
+                                    await serviceProvider.getServices();
                                     Helper.toScreen(context, HomePage());
                                   });
                                 } else {

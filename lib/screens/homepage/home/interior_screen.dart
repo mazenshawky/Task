@@ -102,16 +102,16 @@ List list =[
                       ),
                       //Space
                       SizedBox(height: Helper.setHeight(context)*0.10-60,),
-                      ListView.builder(
-                          itemCount: 3,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context,index){
-                            return  Container(
-                                padding: EdgeInsets.only(bottom: 15),
-                                child: ServicesWidget());
-                          }),
+                      // ListView.builder(
+                      //     itemCount: 3,
+                      //     shrinkWrap: true,
+                      //     padding: EdgeInsets.symmetric(vertical: 15),
+                      //     physics: BouncingScrollPhysics(),
+                      //     itemBuilder: (context,index){
+                      //       return  Container(
+                      //           padding: EdgeInsets.only(bottom: 15),
+                      //           child: ServicesWidget());
+                      //     }),
                       //Space
                       SizedBox(height: Helper.setHeight(context)*0.10-70,),
                       //Offer & packages
