@@ -275,6 +275,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   final catProvider = Provider.of<CategoryProvider>(context, listen: false);
                                   final serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
                                   await catProvider.getCategories();
+				  catProvider.setCategoriesMap();
                                   await serviceProvider.getServices();
                                   Helper.toScreen(context, HomePage());
                                 });
