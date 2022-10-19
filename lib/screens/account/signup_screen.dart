@@ -423,13 +423,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() => this.city = city);
     };
 
-    return buildCityPicker(
-      child: city == null
-          ? buildListTile(title: 'No City', onTap: onTap)
-          : buildListTile(
-        title: city!.name!,
-        onTap: onTap,
-      ),
+    return city == null
+        ? buildListTile(title: 'No City', onTap: onTap)
+        : buildListTile(
+      title: city!.name!,
+      onTap: onTap,
     );
   }
 
@@ -449,22 +447,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget buildCityPicker({
-    required Widget child,
-  }) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Select City',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Card(margin: EdgeInsets.zero, child: child),
-        ],
-      );
+  // Widget buildCityPicker({
+  //   required Widget child,
+  // }) =>
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         const Text(
+  //           'Select City',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 12),
+  //         Card(margin: EdgeInsets.zero, child: child),
+  //       ],
+  //     );
 }

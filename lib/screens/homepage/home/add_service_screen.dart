@@ -26,49 +26,49 @@ class AddServiceScreen extends StatefulWidget {
 }
 
 class _AddServiceScreenState extends State<AddServiceScreen> {
-  List<String> items = [
-    'Select Category',
-    'masakin eayn shams',
-    'maydan alhijaz',
-    'altajamue al\'awal',
-    'masakin shiratun',
-    'ruksi',
-    'almizalaat',
-    'alnazhuh',
-    'alsayidah zaynab',
-    'abu alriysh',
-    'rawd alfaraj',
-    'tariq alfinjarii',
-    'aleabaasia',
-    'dawaran shibra',
-    'zahra madinat nasr',
-    'eabaasia',
-    'bishtil',
-    'kubri uktubar',
-    'alkhalifat almamun',
-    'alhijaz',
-    'al\'alif maskan',
-    'mawqif alsalam alnamudhajii',
-    'almarj',
-    'jisr alsuways',
-    'alhayu alsaabie',
-    'almazalat',
-    'alsabe eimarat',
-    'alzaawiat alhamra',
-    'alnuzhat aljadida',
-    'eabaas aleaqaad',
-    'hadayiq alqabih',
-    'altajamue',
-    'makram eubayd',
-    'saray alqabih',
-    'alnazhuh aljadida',
-    'kuliyat banat eayn shams',
-    'tahrir',
-    'jiza',
-    'alhadayiq',
-    'masakin alshuruq',
-    'zahra eayn shams',
-  ];
+  // List<String> items = [
+  //   'Select Category',
+  //   'masakin eayn shams',
+  //   'maydan alhijaz',
+  //   'altajamue al\'awal',
+  //   'masakin shiratun',
+  //   'ruksi',
+  //   'almizalaat',
+  //   'alnazhuh',
+  //   'alsayidah zaynab',
+  //   'abu alriysh',
+  //   'rawd alfaraj',
+  //   'tariq alfinjarii',
+  //   'aleabaasia',
+  //   'dawaran shibra',
+  //   'zahra madinat nasr',
+  //   'eabaasia',
+  //   'bishtil',
+  //   'kubri uktubar',
+  //   'alkhalifat almamun',
+  //   'alhijaz',
+  //   'al\'alif maskan',
+  //   'mawqif alsalam alnamudhajii',
+  //   'almarj',
+  //   'jisr alsuways',
+  //   'alhayu alsaabie',
+  //   'almazalat',
+  //   'alsabe eimarat',
+  //   'alzaawiat alhamra',
+  //   'alnuzhat aljadida',
+  //   'eabaas aleaqaad',
+  //   'hadayiq alqabih',
+  //   'altajamue',
+  //   'makram eubayd',
+  //   'saray alqabih',
+  //   'alnazhuh aljadida',
+  //   'kuliyat banat eayn shams',
+  //   'tahrir',
+  //   'jiza',
+  //   'alhadayiq',
+  //   'masakin alshuruq',
+  //   'zahra eayn shams',
+  // ];
   final serviceNameController = TextEditingController();
   String? category;
   final priceController = TextEditingController();
@@ -111,187 +111,185 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
               fontWeight: FontWeight.w700,
             ),
           ),
-          body: Consumer<AuthProvider>(builder: (context, authProvider, child) {
-            return SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
+          body: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //service name
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "service name",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: serviceNameController,
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [AutofillHints.name],
+                          onChanged: (_) {},
+                          validation: firstNameField,
+                          hintText: "service name",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                        )
+                      ],
                     ),
-                    //service name
-                    Container(
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //price
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "price",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        //Space
+                        SizedBox(
+                          height: Helper.setHeight(context) * 0.10 - 70,
+                        ),
+                        CustomTextField(
+                          controller: priceController,
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: [AutofillHints.email],
+                          onChanged: (_) {},
+                          validation: priceField,
+                          hintText: "price",
+                          isUnderlineInputBorder: true,
+                          isOutlineInputBorder: false,
+                          contentPaddingLeft: 5,
+                        )
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //category
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "category",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        const SizedBox(height: 25,),
+                        DropdownButtonFormField<String>(
+                          onChanged: categoryChanged,
+                          value: category,
+                          hint: const Text('No Category',style: TextStyle(color: Colors.black),),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            //border: InputBorder.none,
+                          ),
+                          items: catProvider.categoriesMap.values.map<DropdownMenuItem<String>>((String? value) {
+                            return DropdownMenuItem<String>(
+                              child: Text(value!),
+                              value: value,
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 50,
+                  ),
+                  //service location
+                  Container(
+                    padding: kHrPadding,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          title: "service location",
+                          fontSize: 15,
+                          color: blackColor,
+                        ),
+                        Card(child: buildCity(),),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: Helper.setHeight(context) * 0.03 + 10),
+                  //Sign up
+                  Consumer<AddServiceProvider>(
+                    builder: (context, provider, child) => Container(
                       padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "service name",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          CustomTextField(
-                            controller: serviceNameController,
-                            keyboardType: TextInputType.name,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: [AutofillHints.name],
-                            onChanged: (_) {},
-                            validation: firstNameField,
-                            hintText: "service name",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
-                    ),
-                    //price
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "price",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          //Space
-                          SizedBox(
-                            height: Helper.setHeight(context) * 0.10 - 70,
-                          ),
-                          CustomTextField(
-                            controller: priceController,
-                            keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                            autofillHints: [AutofillHints.email],
-                            onChanged: (_) {},
-                            validation: priceField,
-                            hintText: "price",
-                            isUnderlineInputBorder: true,
-                            isOutlineInputBorder: false,
-                            contentPaddingLeft: 5,
-                          )
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
-                    ),
-                    //category
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "category",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          const SizedBox(height: 25,),
-                          DropdownButtonFormField<String>(
-                            onChanged: categoryChanged,
-                            value: category,
-                            hint: const Text('No Category',style: TextStyle(color: Colors.black),),
-                            decoration: const InputDecoration(
-                              filled: true,
-                              //border: InputBorder.none,
-                            ),
-                            items: catProvider.categoriesMap.values.map<DropdownMenuItem<String>>((String? value) {
-                              return DropdownMenuItem<String>(
-                                child: Text(value!),
-                                value: value,
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 50,
-                    ),
-                    //service location
-                    Container(
-                      padding: kHrPadding,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: "service location",
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                          Card(child: buildCity(),),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: Helper.setHeight(context) * 0.03 + 10),
-                    //Sign up
-                    Consumer<AddServiceProvider>(
-                      builder: (context, provider, child) => Container(
-                        padding: kHrPadding,
-                        child: CustomButton(
-                          onPressed: () async {
-                            if(formKey.currentState!.validate() && city?.id != null && category != null){
-                              await provider.addService(
-                                name: serviceNameController.text,
-                                categoryId: catProvider.getCategoryId(category)!,
-                                subCategoryId: 5,
-                                price: priceController.text.toString(),
-                                cityId: city!.id!,
-                              );
-                              if(provider.addServiceModel?.message?.isNotEmpty?? false) {
-                                print(provider.addServiceModel?.message!);
-                                showToast(text: provider.addServiceModel?.message??'');
-                                Helper.toRemoveUntiScreen(context, HomePage());
-                              } else {
-                                showToast(text: 'Please try again');
-                              }
-                            } else if(city?.id == null){
-                              showToast(text: 'Please select a location');
-                            } else if(category == null){
-                              showToast(text: 'Please select a category');
+                      child: CustomButton(
+                        onPressed: () async {
+                          if(formKey.currentState!.validate() && city?.id != null && category != null){
+                            await provider.addService(
+                              name: serviceNameController.text,
+                              categoryId: catProvider.getCategoryId(category)!,
+                              subCategoryId: 5,
+                              price: priceController.text.toString(),
+                              cityId: city!.id!,
+                            );
+                            if(provider.addServiceModel?.message?.isNotEmpty?? false) {
+                              print(provider.addServiceModel?.message!);
+                              showToast(text: provider.addServiceModel?.message??'');
+                              Helper.toRemoveUntiScreen(context, HomePage());
                             } else {
                               showToast(text: 'Please try again');
                             }
-                          },
-                          btnHeight: 46,
-                          btnWidth: double.infinity,
-                          btnRadius: 26,
-                          title: "Add",
-                          fontWeight: FontWeight.w500,
-                          btnColor: blueColor,
-                          textColor: whiteColor,
-                          fontSize: 15,
-                        ),
+                          } else if(city?.id == null){
+                            showToast(text: 'Please select a location');
+                          } else if(category == null){
+                            showToast(text: 'Please select a category');
+                          } else {
+                            showToast(text: 'Please try again');
+                          }
+                        },
+                        btnHeight: 46,
+                        btnWidth: double.infinity,
+                        btnRadius: 26,
+                        title: "Add",
+                        fontWeight: FontWeight.w500,
+                        btnColor: blueColor,
+                        textColor: whiteColor,
+                        fontSize: 15,
                       ),
                     ),
-                    //Space
-                    SizedBox(
-                      height: Helper.setHeight(context) * 0.10 - 40,
-                    ),
-                  ],
-                ),
+                  ),
+                  //Space
+                  SizedBox(
+                    height: Helper.setHeight(context) * 0.10 - 40,
+                  ),
+                ],
               ),
-            );
-          }),
+            ),
+          ),
         ),
       ),
     );
@@ -317,14 +315,20 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
       setState(() => this.city = city);
     };
 
-    return buildCityPicker(
-      child: city == null
+    // return buildCityPicker(
+    //   child: city == null
+    //       ? buildListTile(title: 'No Location', onTap: onTap)
+    //       : buildListTile(
+    //     title: city!.name!,
+    //     onTap: onTap,
+    //   ),
+    // );
+    return city == null
           ? buildListTile(title: 'No Location', onTap: onTap)
           : buildListTile(
         title: city!.name!,
         onTap: onTap,
-      ),
-    );
+      );
   }
 
   Widget buildListTile({
@@ -343,22 +347,22 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
     );
   }
 
-  Widget buildCityPicker({
-    required Widget child,
-  }) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Select City',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Card(margin: EdgeInsets.zero, child: child),
-        ],
-      );
+  // Widget buildCityPicker({
+  //   required Widget child,
+  // }) =>
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         const Text(
+  //           'Select City',
+  //           style: TextStyle(
+  //             color: Colors.red,
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 12),
+  //         Card(margin: EdgeInsets.zero, child: child),
+  //       ],
+  //     );
 }

@@ -7,11 +7,11 @@ import 'package:mono/widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
 class CityScreen extends StatefulWidget {
-  final List<Data> cities;
+  // final List<Data> cities;
 
   const CityScreen({
     Key? key,
-    this.cities = const [],
+    // this.cities = const [],
   }) : super(key: key);
 
   @override
@@ -20,14 +20,14 @@ class CityScreen extends StatefulWidget {
 
 class _CityScreenState extends State<CityScreen> {
   String text = '';
-  List<Data> selectedCities = [];
+  // List<Data> selectedCities = [];
 
-  @override
-  void initState() {
-    super.initState();
-
-    selectedCities = widget.cities;
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   selectedCities = widget.cities;
+  // }
 
   bool containsSearchText(Data city) {
     final name = city.name;
@@ -37,20 +37,21 @@ class _CityScreenState extends State<CityScreen> {
     return countryLower.contains(textLower);
   }
 
-  List<Data> getPrioritizedCities(List<Data> cities) {
-    final notSelectedCities = List.of(cities)
-      ..removeWhere((city) => selectedCities.contains(city));
-
-    return [
-      ...List.of(selectedCities),
-      ...notSelectedCities,
-    ];
-  }
+  // List<Data> getPrioritizedCities(List<Data> cities) {
+  //   final notSelectedCities = List.of(cities)
+  //     ..removeWhere((city) => selectedCities.contains(city));
+  //
+  //   return [
+  //     ...List.of(selectedCities),
+  //     ...notSelectedCities,
+  //   ];
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<CityProvider>(context, listen: true);
-    final allCities = getPrioritizedCities(provider.citiesModel!.data!);
+    final provider = Provider.of<CityProvider>(context, listen: false);
+    // final allCities = getPrioritizedCities(provider.citiesModel!.data!);
+    final allCities = provider.citiesModel!.data!;
     final cities = allCities.where(containsSearchText).toList();
 
     return ConditionalBuilder(
