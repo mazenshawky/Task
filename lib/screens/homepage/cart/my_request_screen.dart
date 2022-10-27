@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/provider/cart_provider.dart';
+import 'package:mono/screens/seven_screens/messages_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/widgets/custom_inkwell_btn.dart';
 import 'package:mono/widgets/custom_text.dart';
 import 'package:mono/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utilites/helper.dart';
 import 'cart_finished.dart';
 import 'cart_waiting.dart';
 import 'cart_working.dart';
@@ -41,7 +43,6 @@ class _MyRequestScreenState extends State<MyRequestScreen>with SingleTickerProvi
                 toolbarHeight: 75,
                 leading: CustomInkWell(
                   onTap: (){
-
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -85,23 +86,28 @@ class _MyRequestScreenState extends State<MyRequestScreen>with SingleTickerProvi
                 actions: [
                   Container(
                       width: 50,
-                      child: Stack(
-                        children: [
-                          Center(child: Image.asset("assets/icons/chat.png",scale: 2,)),
-                          Positioned.directional(
-                              textDirection: Directionality.of(context),
-                              top: 16,
-                              end: 15,
-                              child: Container(
-                                width: 5,
-                                height: 5,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: yellowColor
-                                ),
-                              )
-                          )
-                        ],
+                      child: InkWell(
+                        onTap: (){
+                          Helper.toScreen(context, MessagesScreen());
+                        },
+                        child: Stack(
+                          children: [
+                            Center(child: Image.asset("assets/icons/chat.png",scale: 2,)),
+                            Positioned.directional(
+                                textDirection: Directionality.of(context),
+                                top: 16,
+                                end: 15,
+                                child: Container(
+                                  width: 5,
+                                  height: 5,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: yellowColor
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
                       ))
                 ],
                 bottom: PreferredSize(

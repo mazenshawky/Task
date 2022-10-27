@@ -83,4 +83,7 @@ const Color kAccentColor = Color(0xffFCAAAB);
 const Color kAccentColorVariant = Color(0xffF7A3A2);
 const Color kUnreadChatBG = Color(0xffEE1D1D);
 
+const Color kDividerColor = Color(0xff575757);
+const Color textBlackColor = Color(0xff353535);
+
 String? token;
