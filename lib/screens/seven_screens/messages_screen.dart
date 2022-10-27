@@ -58,13 +58,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context,index)=> buildChatItem(context, images[index]),
-              separatorBuilder: (context, index) => const Padding(
-                padding: EdgeInsets.only(left: 18, right: 18),
-                child:  Divider(
-                  color: kDividerColor,
-                  thickness: 0.5,
-                ),
-              ),
+              separatorBuilder: (context, index) => buildDivider(),
             ),
           ],
         ),
@@ -182,6 +176,16 @@ class _MessagesScreenState extends State<MessagesScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildDivider(){
+    return const Padding(
+      padding: EdgeInsets.only(left: 18, right: 18),
+      child:  Divider(
+        color: kDividerColor,
+        thickness: 0.5,
       ),
     );
   }
