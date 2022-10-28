@@ -53,12 +53,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
           children: [
             buildNewRequests(),
             const SizedBox(height: 12),
-            ListView.separated(
-              itemCount: 5,
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context,index)=> buildChatItem(context, images[index]),
-              separatorBuilder: (context, index) => buildDivider(),
+            Expanded(
+              child: ListView.separated(
+                itemCount: 5,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context,index)=> buildChatItem(context, images[index]),
+                separatorBuilder: (context, index) => buildDivider(),
+              ),
             ),
           ],
         ),
@@ -103,7 +105,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   Widget buildChatItem(BuildContext context, String image){
     return InkWell(
       onTap: (){
-        Helper.toScreen(context, const ChatScreen());
+        Helper.toScreen(context, ChatScreen());
       },
       child: Row(
         children: [
