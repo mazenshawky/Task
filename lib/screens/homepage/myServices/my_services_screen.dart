@@ -10,6 +10,7 @@ import 'package:mono/widgets/custom_inkwell_btn.dart';
 import 'package:mono/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
+import '../../seven_screens/add_new_service_screen.dart';
 import 'finished_screen.dart';
 import 'waiting_screen.dart';
 import 'working_screen.dart';
@@ -132,24 +133,48 @@ class _MyServicesScreenState extends State<MyServicesScreen>with SingleTickerPro
                   WorkingScreen(),
                   FinishedScreen(),
                 ]),
-            bottomNavigationBar: BottomAppBar(
-              elevation: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 18,vertical: 15),
-                child: CustomButton(
-                  onPressed: () {
-                    Helper.toScreen(context, AddServiceScreen());
-                  },
-                  btnHeight: 46,
-                  btnWidth: double.infinity,
-                  btnRadius: 26,
-                  title: "+ add a new service",
-                  fontWeight: FontWeight.w500,
-                  btnColor: blueColor,
-                  textColor: whiteColor,
-                  fontSize: 15,
+            bottomNavigationBar: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BottomAppBar(
+                  elevation: 0,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18,vertical: 15),
+                    child: CustomButton(
+                      onPressed: () {
+                        Helper.toScreen(context, AddServiceScreen());
+                      },
+                      btnHeight: 46,
+                      btnWidth: double.infinity,
+                      btnRadius: 26,
+                      title: "+ add a new service",
+                      fontWeight: FontWeight.w500,
+                      btnColor: blueColor,
+                      textColor: whiteColor,
+                      fontSize: 15,
+                    ),
+                  ),
                 ),
-              ),
+                BottomAppBar(
+                  elevation: 0,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18,vertical: 15),
+                    child: CustomButton(
+                      onPressed: () {
+                        Helper.toScreen(context, const AddNewServiceScreen());
+                      },
+                      btnHeight: 46,
+                      btnWidth: double.infinity,
+                      btnRadius: 26,
+                      title: "+ add a new service demo",
+                      fontWeight: FontWeight.w500,
+                      btnColor: blueColor,
+                      textColor: whiteColor,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         }

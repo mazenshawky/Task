@@ -90,5 +90,6 @@ const Color textDarkColor = Color(0xff4F5050);
 const Color kMessageColor = Color(0x66DDDDDD);
 const Color kTimeMessageColor = Color(0xff878787);
 const Color messageHintTextColor = Color(0xffB7C2DA);
+const Color shadowColor = Color(0x0A000000);
 
 String? token;

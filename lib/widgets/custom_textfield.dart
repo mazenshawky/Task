@@ -46,6 +46,7 @@ class CustomTextField extends StatelessWidget {
       this.isSearch = false,
       this.autofillHints,
       this.textInputAction,
+        this.decoration,
       this.onEditingComplete,
       Key? key})
       : super(key: key);
@@ -91,6 +92,7 @@ class CustomTextField extends StatelessWidget {
   Widget? suffixIcon;
   var autofillHints;
   TextInputAction? textInputAction;
+  InputDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +117,7 @@ class CustomTextField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       //  textAlignVertical:textAlign != null? TextAlignVertical.bottom:TextAlignVertical.center,
       cursorColor: blueColor,
-      decoration: InputDecoration(
+      decoration: decoration ?? InputDecoration(
         contentPadding: EdgeInsets.only(
             left: contentPaddingLeft ?? 12, right: contentPaddingRight ?? 12, top: contentPaddingTop ?? 13, bottom: contentPaddingBottom ?? 13),
         isDense: true,
