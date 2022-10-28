@@ -86,11 +86,13 @@ const Color kUnreadChatBG = Color(0xffEE1D1D);
 const Color kDividerColor = Color(0xff575757);
 const Color textBlackColor = Color(0xff353535);
 const Color textBlackColor2 = Color(0xff1C1C1C);
+const Color textBlackColor3 = Color(0xff323232);
 const Color textLightBlackColor = Color(0xcc353535);
 const Color textDarkColor = Color(0xff4F5050);
 const Color kMessageColor = Color(0x66DDDDDD);
 const Color kTimeMessageColor = Color(0xff878787);
 const Color messageHintTextColor = Color(0xffB7C2DA);
 const Color shadowColor = Color(0x0A000000);
+const Color lightOrangeColor = Color(0x4dFFC90B);
 
 String? token;
