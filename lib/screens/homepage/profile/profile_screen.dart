@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/core/Util/netWork/local/cache_helper.dart';
 import 'package:mono/screens/account/signin_screen.dart';
+import 'package:mono/screens/seven_screens/wallet/wallet_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/utilites/helper.dart';
 import 'package:mono/widgets/custom_inkwell_btn.dart';
@@ -66,7 +67,9 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   padding: kHrPadding,
                   child: CustomInkWell(
-                    onTap: (){},
+                    onTap: (){
+                      Helper.toScreen(context,  WalletScreen());
+                    },
                     child: Container(
                       height: 50,
                       child: Row(
