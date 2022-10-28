@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/provider/cart_provider.dart';
 import 'package:mono/screens/seven_screens/messages_screen.dart';
+import 'package:mono/screens/seven_screens/notifications_screen.dart';
 import 'package:mono/utilites/constants.dart';
 import 'package:mono/widgets/custom_inkwell_btn.dart';
 import 'package:mono/widgets/custom_text.dart';
@@ -43,6 +44,7 @@ class _MyRequestScreenState extends State<MyRequestScreen>with SingleTickerProvi
                 toolbarHeight: 75,
                 leading: CustomInkWell(
                   onTap: (){
+                    Helper.toScreen(context, const NotificationsScreen());
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
