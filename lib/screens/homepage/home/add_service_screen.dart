@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mono/models/city_model.dart';
 import 'package:mono/provider/add_service_provider.dart';
-import 'package:mono/provider/auth_provider.dart';
 import 'package:mono/provider/category_provider.dart';
 import 'package:mono/provider/city_provider.dart';
 import 'package:mono/screens/account/city_screen.dart';
@@ -17,6 +16,8 @@ import 'package:mono/widgets/custom_text.dart';
 import 'package:mono/widgets/custom_textfield.dart';
 import 'package:mono/widgets/custom_toast.dart';
 import 'package:provider/provider.dart';
+
+import '../../../provider/serivce_provider.dart';
 
 class AddServiceScreen extends StatefulWidget {
   AddServiceScreen({Key? key}) : super(key: key);
@@ -259,6 +260,8 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                             if(provider.addServiceModel?.message?.isNotEmpty?? false) {
                               print(provider.addServiceModel?.message!);
                               showToast(text: provider.addServiceModel?.message??'');
+                              final serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
+                              await serviceProvider.getServices();
                               Helper.toRemoveUntiScreen(context, HomePage());
                             } else {
                               showToast(text: 'Please try again');

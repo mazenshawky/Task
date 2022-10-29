@@ -160,12 +160,12 @@ List list =[
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              title: serviceProvider.serviceModel!.data!.first.name,
+                              title: serviceProvider.serviceModels[0]!.data!.first.name,
                               fontSize: 12,
                               color: blackColor,
                             ) ,
                             CustomText(
-                              title: serviceProvider.serviceModel!.data!.first.price,
+                              title: serviceProvider.serviceModels[0]!.data!.first.price,
                               fontSize: 20,
                               color: blueColor,
                             )

@@ -135,12 +135,12 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            title: serviceProvider.serviceModel!.data!.first.name,
+                            title: serviceProvider.serviceModels[0]!.data!.first.name,
                             fontSize: 12,
                             color: blackColor,
                           ) ,
                           CustomText(
-                            title: serviceProvider.serviceModel!.data!.first.price,
+                            title: serviceProvider.serviceModels[0]!.data!.first.price,
                             fontSize: 20,
                             color: blueColor,
                           )
@@ -160,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                               Helper.toScreen(context, InteriorScreen(serviceProvider: serviceProvider,));
                             },
                             child: CustomText(
-                              title: serviceProvider.serviceModel!.data!.first.category,
+                              title: serviceProvider.serviceModels[0]!.data!.first.category,
                               fontSize: 12,
                               color: blackColor,
                             ),
@@ -192,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                               child: CustomText(
                                 // title: "Designer / Ibrahim",
                                 // title: "Designer / ${serviceProvider.serviceModel!.data!.first.provider!.firstName}",
-                                title: "Designer / ${serviceProvider.serviceModel!.data!.first.provider!.email.toString().split("@")[0]}",
+                                title: "Designer / ${serviceProvider.serviceModels[0]!.data!.first.provider!.email.toString().split("@")[0]}",
                                 fontSize: 12,
                                 color: greyColor,
                               )),
